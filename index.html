@@ -18,11 +18,13 @@
       crossorigin="anonymous"
     />
     <script
+      defer
       src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
       xintegrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0i8"
       crossorigin="anonymous"
     ></script>
     <script
+      defer
       src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
       xintegrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
       crossorigin="anonymous"
@@ -81,6 +83,15 @@
         margin-left: auto;
         margin-right: auto;
         height: 350px;
+      }
+      /* Custom checkbox styles */
+      .toggle-checkbox:checked {
+        background-color: #0ea5e9;
+        border-color: #0ea5e9;
+      }
+      .toggle-checkbox:checked + .toggle-label {
+        color: #0c4a6e;
+        font-weight: 600;
       }
 
       /* Animation for Simple Pendulum */
@@ -216,7 +227,7 @@
           class="nav-btn py-3 px-2 md:px-4 text-sm md:text-base font-semibold text-slate-600 hover:bg-sky-50"
           data-target="lesson-3-5"
         >
-          Bài 3-5: Lực, Năng lượng & Hệ dao động
+          Bài 3-5: Vận tốc, Gia tốc & Năng lượng
         </button>
         <button
           class="nav-btn py-3 px-2 md:px-4 text-sm md:text-base font-semibold text-slate-600 hover:bg-sky-50"
@@ -244,18 +255,18 @@
           <h3 class="text-xl font-semibold mb-3 text-slate-700">
             1. Các Khái Niệm Cơ Bản
           </h3>
-          <p>
+          <p class="mb-2">
             <strong class="font-medium text-sky-600">Dao động cơ:</strong>
             Chuyển động lặp đi lặp lại quanh một vị trí cân bằng.
           </p>
-          <p>
+          <p class="mb-2">
             <strong class="font-medium text-sky-600"
               >Dao động tuần hoàn:</strong
             >
             Sau những khoảng thời gian bằng nhau (chu kì), vật trở lại vị trí cũ
-            theo hướng cũ.
+            theo hướng cũ. Ví dụ: dao động của con lắc đồng hồ.
           </p>
-          <p>
+          <p class="mb-2">
             <strong class="font-medium text-sky-600"
               >Dao động điều hoà (DĐĐH):</strong
             >
@@ -266,7 +277,7 @@
 
         <div class="concept-card">
           <h3 class="text-xl font-semibold mb-3 text-slate-700">
-            2. Phương Trình và Đồ Thị Dao Động Điều Hoà
+            2. Phương Trình Dao Động Điều Hoà
           </h3>
           <div class="grid md:grid-cols-2 gap-6 items-center">
             <div>
@@ -275,11 +286,13 @@
                 $x = A\cos(\omega t + \phi)$
               </div>
               <ul class="list-disc list-inside mt-3 space-y-1 text-slate-600">
-                <li>$x$: li độ (vị trí của vật)</li>
-                <li>$A$: biên độ (li độ cực đại)</li>
-                <li>$\omega$: tần số góc (rad/s)</li>
-                <li>$(\omega t + \phi)$: pha dao động tại thời điểm t</li>
-                <li>$\phi$: pha ban đầu (tại t=0)</li>
+                <li>$x$: li độ - vị trí của vật tại thời điểm t.</li>
+                <li>$A$: biên độ - li độ cực đại (A > 0).</li>
+                <li>$\omega$: tần số góc (rad/s).</li>
+                <li>$(\omega t + \phi)$: pha dao động tại thời điểm t.</li>
+                <li>
+                  $\phi$: pha ban đầu - xác định trạng thái dao động tại t=0.
+                </li>
               </ul>
             </div>
             <div class="chart-container" style="height: 250px">
@@ -292,26 +305,30 @@
           <h3 class="text-xl font-semibold mb-3 text-slate-700">
             3. Các Đại Lượng Đặc Trưng
           </h3>
+          <p class="text-slate-600 mb-4">
+            Biên độ, chu kì, tần số và tần số góc là những hằng số đặc trưng cho
+            một dao động cụ thể.
+          </p>
           <div class="grid md:grid-cols-3 gap-4">
             <div class="formula-card">
               <h4 class="font-semibold">Chu kì (T)</h4>
               <p>$T = \frac{2\pi}{\omega} = \frac{1}{f}$</p>
               <p class="text-sm text-slate-600">
-                Thời gian thực hiện 1 dao động (s).
+                Khoảng thời gian để vật thực hiện được một dao động (s).
               </p>
             </div>
             <div class="formula-card">
               <h4 class="font-semibold">Tần số (f)</h4>
               <p>$f = \frac{1}{T} = \frac{\omega}{2\pi}$</p>
               <p class="text-sm text-slate-600">
-                Số dao động trong 1 giây (Hz).
+                Số dao động mà vật thực hiện được trong một giây (Hz).
               </p>
             </div>
             <div class="formula-card">
               <h4 class="font-semibold">Tần số góc ($\omega$)</h4>
               <p>$\omega = 2\pi f = \frac{2\pi}{T}$</p>
               <p class="text-sm text-slate-600">
-                Tốc độ biến thiên của pha (rad/s).
+                Đặc trưng cho tốc độ biến thiên của pha (rad/s).
               </p>
             </div>
           </div>
@@ -322,12 +339,13 @@
             4. Pha và Độ Lệch Pha
           </h3>
           <p class="mb-4 text-slate-600">
-            Pha dao động xác định trạng thái (li độ và chiều chuyển động) của
-            vật. Độ lệch pha cho biết sự sớm hay trễ pha giữa hai dao động cùng
-            chu kì.
+            Pha ban đầu ($\phi$) xác định trạng thái xuất phát của dao động. Độ
+            lệch pha ($\Delta\phi$) cho biết sự sớm hay trễ pha giữa hai dao
+            động cùng chu kì.
           </p>
           <div class="formula-card mb-4 text-center text-lg">
-            Độ lệch pha: $\Delta\phi = \phi_2 - \phi_1$
+            Độ lệch pha: $\Delta\phi = (\omega t + \phi_2) - (\omega t + \phi_1)
+            = \phi_2 - \phi_1$
           </div>
           <div class="grid md:grid-cols-3 gap-4 text-center">
             <div class="bg-slate-100 p-4 rounded-lg">
@@ -381,7 +399,7 @@
       <!-- Bài 3 & 5: Vận tốc, Gia tốc và Năng lượng -->
       <section id="lesson-3-5" class="content-section">
         <h2 class="text-2xl font-bold text-sky-700 mb-4">
-          Bài 3 & 5: Lực, Năng Lượng và Các Hệ Dao Động
+          Bài 3 & 5: Vận Tốc, Gia Tốc và Năng Lượng
         </h2>
 
         <div class="concept-card">
@@ -390,110 +408,100 @@
           </h3>
           <p class="mb-4 text-slate-600">
             Vận tốc và gia tốc trong DĐĐH cũng biến thiên điều hoà nhưng lệch
-            pha so với li độ. Biểu đồ dưới đây thể hiện mối quan hệ này.
+            pha so với li độ.
           </p>
-          <div class="chart-container">
-            <canvas id="xvaChart"></canvas>
-          </div>
-          <div class="grid md:grid-cols-2 gap-4 mt-4">
+          <div class="grid md:grid-cols-2 gap-4">
             <div class="formula-card">
               <h4 class="font-semibold">Vận tốc (v)</h4>
-              <p>$v = -\omega A\sin(\omega t + \phi)$</p>
-              <p class="text-sm text-slate-600">
-                Sớm pha $\frac{\pi}{2}$ so với li độ $x$.
+              <p>$v = x' = -\omega A\sin(\omega t + \phi)$</p>
+              <p>$v = \omega A\cos(\omega t + \phi + \frac{\pi}{2})$</p>
+              <p class="text-sm text-slate-600 mt-2">
+                Sớm pha $\frac{\pi}{2}$ so với li độ $x$. Đạt cực đại tại VTCB,
+                bằng 0 tại biên.
               </p>
             </div>
             <div class="formula-card">
               <h4 class="font-semibold">Gia tốc (a)</h4>
-              <p>$a = -\omega^2 A\cos(\omega t + \phi) = -\omega^2x$</p>
-              <p class="text-sm text-slate-600">
-                Ngược pha (lệch $\pi$) so với li độ $x$.
+              <p>$a = v' = -\omega^2 A\cos(\omega t + \phi)$</p>
+              <p>$a = -\omega^2x$</p>
+              <p class="text-sm text-slate-600 mt-2">
+                Ngược pha so với li độ $x$, sớm pha $\frac{\pi}{2}$ so với vận
+                tốc $v$. Đạt cực đại tại biên, bằng 0 tại VTCB.
               </p>
             </div>
           </div>
-        </div>
-
-        <div class="concept-card">
-          <h3 class="text-xl font-semibold mb-3 text-slate-700">
-            2. Lực Kéo Về (Lực Hồi Phục)
-          </h3>
-          <p class="mb-4 text-slate-600">
-            Là hợp lực tác dụng lên vật, luôn hướng về vị trí cân bằng và gây ra
-            gia tốc cho vật. Lực này tỉ lệ với li độ và có chiều ngược với chiều
-            của li độ.
-          </p>
-          <div class="formula-card text-center text-lg mb-4">
-            $F = -kx = ma$
-          </div>
-          <div class="mt-6">
-            <h4 class="font-semibold text-lg mb-2 text-center">
-              Mô phỏng Lực kéo về
-            </h4>
-            <canvas
-              id="restoringForceCanvas"
-              height="100"
-              class="w-full bg-slate-50 rounded-lg"
-            ></canvas>
-            <p class="text-center text-sm mt-2 text-slate-600">
-              Mũi tên màu đỏ biểu diễn vector lực kéo về, luôn hướng về VTCB và
-              có độ lớn tỉ lệ với li độ.
-            </p>
+          <div class="chart-container mt-4">
+            <canvas id="xvaChart"></canvas>
           </div>
         </div>
 
         <div class="concept-card">
           <h3 class="text-xl font-semibold mb-3 text-slate-700">
-            3. Năng Lượng trong DĐĐH
+            2. Năng Lượng trong DĐĐH
           </h3>
           <p class="mb-4 text-slate-600">
-            Cơ năng được bảo toàn. Động năng và thế năng biến thiên tuần hoàn
-            với tần số góc $2\omega$ và chu kì $T/2$.
+            Trong DĐĐH, cơ năng được bảo toàn (khi không có ma sát). Động năng
+            và thế năng biến thiên tuần hoàn, chuyển hóa qua lại lẫn nhau.
           </p>
-          <div class="chart-container">
-            <canvas id="energyChart"></canvas>
-          </div>
-          <div class="grid md:grid-cols-3 gap-4 mt-4">
+          <div class="grid md:grid-cols-3 gap-4">
             <div class="formula-card">
               <h4 class="font-semibold">Động năng</h4>
               <p>$W_đ = \frac{1}{2}mv^2$</p>
+              <p>$W_đ = \frac{1}{2}m\omega^2(A^2-x^2)$</p>
             </div>
             <div class="formula-card">
               <h4 class="font-semibold">Thế năng</h4>
               <p>$W_t = \frac{1}{2}kx^2$</p>
+              <p>$W_t = \frac{1}{2}m\omega^2x^2$</p>
             </div>
             <div class="formula-card">
               <h4 class="font-semibold">Cơ năng</h4>
-              <p>$W = W_đ + W_t = \frac{1}{2}kA^2$</p>
+              <p>$W = W_đ + W_t$</p>
+              <p>$W = \frac{1}{2}m\omega^2A^2 = \text{hằng số}$</p>
             </div>
+          </div>
+          <div class="chart-container mt-4">
+            <canvas id="energyChart"></canvas>
           </div>
         </div>
 
         <div class="concept-card">
           <h3 class="text-xl font-semibold mb-3 text-slate-700">
-            4. Các Hệ Dao Động Cơ Học
+            3. Các Hệ Dao Động Cơ Học
           </h3>
-          <div class="grid md:grid-cols-2 gap-8 mt-4">
-            <div>
+          <div class="grid md:grid-cols-2 gap-8 mt-4 items-start">
+            <!-- Con lắc lò xo -->
+            <div class="text-center">
               <h4 class="text-lg font-semibold mb-2 text-emerald-700">
                 Con lắc lò xo
               </h4>
-              <p class="text-slate-600">
+              <p class="text-slate-600 min-h-[4rem]">
                 Gồm một vật nhỏ khối lượng $m$ gắn vào một lò xo có độ cứng $k$.
-                Dao động điều hoà nếu bỏ qua ma sát.
+                Thế năng là thế năng đàn hồi.
               </p>
+              <div class="spring-container">
+                <div class="spring-support"></div>
+                <div class="spring-coil"></div>
+                <div class="spring-mass">m</div>
+              </div>
               <div class="formula-card mt-2">
                 <p>Tần số góc: $\omega = \sqrt{\frac{k}{m}}$</p>
                 <p>Chu kì: $T = 2\pi\sqrt{\frac{m}{k}}$</p>
               </div>
             </div>
-            <div>
+            <!-- Con lắc đơn -->
+            <div class="text-center">
               <h4 class="text-lg font-semibold mb-2 text-sky-700">
                 Con lắc đơn
               </h4>
-              <p class="text-slate-600">
+              <p class="text-slate-600 min-h-[4rem]">
                 Gồm một vật nhỏ khối lượng $m$ treo ở đầu một sợi dây dài $l$.
-                Dao động điều hoà với góc lệch nhỏ.
+                Thế năng là thế năng trọng trường.
               </p>
+              <div class="pendulum-container">
+                <div class="pendulum-pivot"></div>
+                <div class="pendulum-rod"><div class="pendulum-bob"></div></div>
+              </div>
               <div class="formula-card mt-2">
                 <p>Tần số góc: $\omega = \sqrt{\frac{g}{l}}$</p>
                 <p>Chu kì: $T = 2\pi\sqrt{\frac{l}{g}}$</p>
@@ -511,7 +519,44 @@
 
         <div class="concept-card">
           <h3 class="text-xl font-semibold mb-3 text-slate-700">
-            1. So Sánh Các Loại Dao Động
+            1. Phân Loại Các Dao Động
+          </h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="p-4 bg-slate-50 rounded-lg">
+              <h4 class="font-semibold text-sky-700">Dao động tự do</h4>
+              <p class="text-slate-600 text-sm">
+                Dao động với tần số riêng $f_0$ không đổi, chỉ phụ thuộc vào đặc
+                tính của hệ, không chịu tác dụng của lực cản.
+              </p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-lg">
+              <h4 class="font-semibold text-amber-700">Dao động tắt dần</h4>
+              <p class="text-slate-600 text-sm">
+                Dao động có biên độ giảm dần theo thời gian do lực cản môi
+                trường làm cơ năng chuyển hóa thành nhiệt năng.
+              </p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-lg">
+              <h4 class="font-semibold text-emerald-700">Dao động cưỡng bức</h4>
+              <p class="text-slate-600 text-sm">
+                Dao động chịu tác dụng của ngoại lực tuần hoàn $F =
+                F_0\cos(\omega t)$. Dao động có tần số bằng tần số của ngoại
+                lực.
+              </p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-lg">
+              <h4 class="font-semibold text-rose-700">Hiện tượng cộng hưởng</h4>
+              <p class="text-slate-600 text-sm">
+                Biên độ dao động cưỡng bức tăng đến cực đại khi tần số lực cưỡng
+                bức $f$ bằng tần số riêng $f_0$ của hệ.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="concept-card">
+          <h3 class="text-xl font-semibold mb-3 text-slate-700">
+            2. Đồ thị các loại dao động
           </h3>
           <p class="mb-4 text-slate-600">
             Chọn một loại dao động để xem đồ thị li độ theo thời gian của nó.
@@ -520,16 +565,16 @@
             class="flex justify-center space-x-2 md:space-x-4 mb-4 flex-wrap"
           >
             <button
+              id="btn-free"
+              class="px-4 py-2 bg-sky-500 text-white rounded-lg hover:bg-sky-600 transition"
+            >
+              Tự do
+            </button>
+            <button
               id="btn-damped"
               class="px-4 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition"
             >
               Tắt dần
-            </button>
-            <button
-              id="btn-maintained"
-              class="px-4 py-2 bg-sky-500 text-white rounded-lg hover:bg-sky-600 transition"
-            >
-              Duy trì
             </button>
             <button
               id="btn-forced"
@@ -551,13 +596,24 @@
 
         <div class="concept-card">
           <h3 class="text-xl font-semibold mb-3 text-slate-700">
-            2. Hiện Tượng Cộng Hưởng
+            3. Đồ Thị Cộng Hưởng
+          </h3>
+          <p class="text-slate-600 mb-4">
+            Đồ thị biểu diễn sự phụ thuộc của biên độ dao động cưỡng bức (A) vào
+            tần số của ngoại lực ($f$). Đồ thị càng nhọn khi lực cản của môi
+            trường càng nhỏ.
+          </p>
+          <div class="chart-container">
+            <canvas id="resonanceChart"></canvas>
+          </div>
+        </div>
+
+        <div class="concept-card">
+          <h3 class="text-xl font-semibold mb-3 text-slate-700">
+            4. Ứng Dụng và Tác Hại của Cộng Hưởng
           </h3>
           <p class="text-slate-600">
-            Là hiện tượng biên độ dao động cưỡng bức tăng đến giá trị cực đại
-            khi tần số của lực cưỡng bức ($f$) tiến đến bằng tần số dao động
-            riêng ($f_0$) của hệ. Hiện tượng này có cả ứng dụng lợi và hại trong
-            thực tế.
+            Hiện tượng này có cả ứng dụng lợi và hại trong thực tế.
           </p>
           <div class="mt-4 grid md:grid-cols-2 gap-4">
             <div
@@ -565,8 +621,8 @@
             >
               <h4 class="font-bold text-emerald-800">Có Lợi</h4>
               <p>
-                Hộp đàn guitar, violon; mạch chọn sóng trong radio, TV; lò vi
-                sóng.
+                Hộp đàn guitar, violon (khuếch đại âm thanh), mạch chọn sóng
+                trong radio, TV, lò vi sóng (làm nóng thức ăn).
               </p>
             </div>
             <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
@@ -584,44 +640,142 @@
       <!-- Mô phỏng -->
       <section id="simulations" class="content-section">
         <h2 class="text-2xl font-bold text-sky-700 mb-4">
-          Mô Phỏng & Thí Nghiệm Trực Quan
+          Thí Nghiệm Tương Tác
         </h2>
-        <p class="mb-8 text-slate-600">
-          Quan sát các mô hình dao động cơ bản và các công thức liên quan.
-        </p>
 
         <div class="concept-card">
           <h3 class="text-xl font-semibold mb-3 text-slate-700">
-            1. Con Lắc Lò Xo và Con Lắc Đơn
+            1. Thí Nghiệm Tổng Hợp
           </h3>
-          <div class="grid md:grid-cols-2 gap-8">
-            <!-- Con lắc lò xo -->
-            <div class="bg-white p-6 rounded-lg border text-center">
-              <h4 class="text-xl font-semibold mb-4 text-emerald-700">
-                Con Lắc Lò Xo
+          <p class="mb-8 text-slate-600">
+            Thay đổi các thông số của một dao động điều hoà để quan sát sự thay
+            đổi trên đồ thị li độ, vận tốc, gia tốc và năng lượng.
+          </p>
+          <div class="grid lg:grid-cols-3 gap-6">
+            <!-- Controls -->
+            <div class="lg:col-span-1 space-y-4">
+              <h4 class="text-lg font-semibold text-slate-700">
+                Bảng điều khiển
               </h4>
-              <div class="spring-container">
-                <div class="spring-support"></div>
-                <div class="spring-coil"></div>
-                <div class="spring-mass">m</div>
+              <div>
+                <label for="amplitude" class="block font-medium mb-1"
+                  >Biên độ A (cm)</label
+                >
+                <input
+                  type="range"
+                  id="amplitude"
+                  min="1"
+                  max="10"
+                  value="5"
+                  step="0.5"
+                  class="w-full"
+                />
+                <p class="text-center mt-1">
+                  A = <span id="amplitudeValue">5.0</span> cm
+                </p>
               </div>
-              <div class="formula-card space-y-2 mt-4">
-                <p>$\omega = \sqrt{\frac{k}{m}}$</p>
-                <p>$T = 2\pi\sqrt{\frac{m}{k}}$</p>
+              <div>
+                <label for="omega" class="block font-medium mb-1"
+                  >Tần số góc $\omega$ (rad/s)</label
+                >
+                <input
+                  type="range"
+                  id="omega"
+                  min="0.5"
+                  max="5"
+                  value="2"
+                  step="0.1"
+                  class="w-full"
+                />
+                <p class="text-center mt-1">
+                  $\omega$ = <span id="omegaValue">2.0</span> rad/s
+                </p>
+              </div>
+              <div>
+                <label for="phi" class="block font-medium mb-1"
+                  >Pha ban đầu $\phi$ ($\times \pi$ rad)</label
+                >
+                <input
+                  type="range"
+                  id="phi"
+                  min="-1"
+                  max="1"
+                  value="0"
+                  step="0.1"
+                  class="w-full"
+                />
+                <p class="text-center mt-1">
+                  $\phi$ = <span id="phiValue">0.00</span>$\pi$ rad
+                </p>
+              </div>
+
+              <h4 class="font-semibold pt-2">Hiển thị đồ thị</h4>
+              <div class="space-y-2">
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="showX"
+                    class="toggle-checkbox h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
+                    checked
+                  />
+                  <label
+                    for="showX"
+                    class="ml-2 block text-sm text-gray-900 toggle-label"
+                    >Li độ (x)</label
+                  >
+                </div>
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="showV"
+                    class="toggle-checkbox h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
+                    checked
+                  />
+                  <label
+                    for="showV"
+                    class="ml-2 block text-sm text-gray-900 toggle-label"
+                    >Vận tốc (v)</label
+                  >
+                </div>
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="showA"
+                    class="toggle-checkbox h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
+                    checked
+                  />
+                  <label
+                    for="showA"
+                    class="ml-2 block text-sm text-gray-900 toggle-label"
+                    >Gia tốc (a)</label
+                  >
+                </div>
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="showEnergy"
+                    class="toggle-checkbox h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500"
+                  />
+                  <label
+                    for="showEnergy"
+                    class="ml-2 block text-sm text-gray-900 toggle-label"
+                    >Năng lượng (W, Wđ, Wt)</label
+                  >
+                </div>
               </div>
             </div>
-            <!-- Con lắc đơn -->
-            <div class="bg-white p-6 rounded-lg border text-center">
-              <h4 class="text-xl font-semibold mb-4 text-sky-700">
-                Con Lắc Đơn
-              </h4>
-              <div class="pendulum-container">
-                <div class="pendulum-pivot"></div>
-                <div class="pendulum-rod"><div class="pendulum-bob"></div></div>
+            <!-- Chart and Animation -->
+            <div class="lg:col-span-2">
+              <div class="relative w-full aspect-[4/3] max-h-[500px]">
+                <canvas id="interactiveChart"></canvas>
               </div>
-              <div class="formula-card space-y-2 mt-4">
-                <p>$\omega = \sqrt{\frac{g}{l}}$</p>
-                <p>$T = 2\pi\sqrt{\frac{l}{g}}$</p>
+              <div class="mt-4">
+                <h4 class="text-center font-semibold">Mô phỏng vật</h4>
+                <canvas
+                  id="massAnimation"
+                  height="80"
+                  class="w-full bg-slate-50 rounded-lg mt-2"
+                ></canvas>
               </div>
             </div>
           </div>
@@ -646,8 +800,8 @@
               <input
                 type="range"
                 id="phi1"
-                min="-2"
-                max="2"
+                min="-1"
+                max="1"
                 value="0"
                 step="0.1"
                 class="w-full"
@@ -663,8 +817,8 @@
               <input
                 type="range"
                 id="phi2"
-                min="-2"
-                max="2"
+                min="-1"
+                max="1"
                 value="0.5"
                 step="0.1"
                 class="w-full"
@@ -688,45 +842,39 @@
       document.addEventListener("DOMContentLoaded", function () {
         const navButtons = document.querySelectorAll(".nav-btn");
         const contentSections = document.querySelectorAll(".content-section");
-        const charts = {};
+        let charts = {};
 
-        // KaTeX auto-rendering
+        // Render math formulas with KaTeX
         renderMathInElement(document.body, {
           delimiters: [
             { left: "$$", right: "$$", display: true },
             { left: "$", right: "$", display: false },
-            { left: "\\(", right: "\\)", display: false },
-            { left: "\\[", right: "\\]", display: true },
           ],
           throwOnError: false,
         });
 
+        // --- Tab Navigation ---
         function switchTab(targetId) {
           contentSections.forEach((section) =>
             section.classList.remove("active")
           );
           navButtons.forEach((button) => button.classList.remove("active"));
-
           document.getElementById(targetId).classList.add("active");
           document
             .querySelector(`[data-target="${targetId}"]`)
             .classList.add("active");
-
-          initializeChart(targetId);
+          initializeForTab(targetId);
         }
 
         navButtons.forEach((button) => {
-          button.addEventListener("click", () => {
-            const targetId = button.getAttribute("data-target");
-            switchTab(targetId);
-          });
+          button.addEventListener("click", () =>
+            switchTab(button.getAttribute("data-target"))
+          );
         });
 
-        function initializeChart(targetId) {
-          if (charts[targetId]) {
-            return;
-          }
-          charts[targetId] = true;
+        // --- Chart & Simulation Initialization ---
+        function initializeForTab(targetId) {
+          if (charts[targetId]) return;
 
           switch (targetId) {
             case "lesson-1-2":
@@ -736,29 +884,38 @@
             case "lesson-3-5":
               createXvaChart();
               createEnergyChart();
-              createRestoringForceAnimation();
               break;
             case "lesson-6":
               createOscillationTypeChart();
+              createResonanceChart();
               break;
             case "simulations":
+              setupComprehensiveSimulation();
               createPhaseShiftChart();
               break;
           }
+          charts[targetId] = true;
         }
+
+        const chartDefaultOptions = {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: "index", intersect: false },
+          plugins: { legend: { position: "top" } },
+        };
 
         function createShmGraph() {
           const ctx = document.getElementById("shmGraph").getContext("2d");
           const labels = Array.from({ length: 51 }, (_, i) =>
             (i * 0.25).toFixed(2)
           );
-          charts["shmGraph"] = new Chart(ctx, {
+          charts["shmGraphObj"] = new Chart(ctx, {
             type: "line",
             data: {
               labels: labels,
               datasets: [
                 {
-                  label: "Đồ thị li độ x-t",
+                  label: "Li độ x (cm)",
                   data: labels.map((t) => 10 * Math.cos((Math.PI / 2) * t)),
                   borderColor: "#38bdf8",
                   backgroundColor: "rgba(56, 189, 248, 0.1)",
@@ -768,8 +925,7 @@
               ],
             },
             options: {
-              responsive: true,
-              maintainAspectRatio: false,
+              ...chartDefaultOptions,
               scales: {
                 x: { title: { display: true, text: "t(s)" } },
                 y: { title: { display: true, text: "x(cm)" } },
@@ -785,7 +941,7 @@
           const labels = Array.from({ length: 41 }, (_, i) =>
             (i * 0.1).toFixed(1)
           );
-          charts["xvaChart"] = new Chart(ctx, {
+          charts["xvaChartObj"] = new Chart(ctx, {
             type: "line",
             data: {
               labels: labels,
@@ -796,6 +952,7 @@
                   borderColor: "#38bdf8",
                   fill: false,
                   tension: 0.1,
+                  yAxisID: "y",
                 },
                 {
                   label: "Vận tốc v (cm/s)",
@@ -803,6 +960,7 @@
                   borderColor: "#10b981",
                   fill: false,
                   tension: 0.1,
+                  yAxisID: "y1",
                 },
                 {
                   label: "Gia tốc a (cm/s²)",
@@ -812,18 +970,28 @@
                   borderColor: "#f97316",
                   fill: false,
                   tension: 0.1,
+                  yAxisID: "y2",
                 },
               ],
             },
             options: {
-              responsive: true,
-              maintainAspectRatio: false,
+              ...chartDefaultOptions,
               scales: {
-                y: {
-                  beginAtZero: false,
-                  title: { display: true, text: "Giá trị" },
-                },
                 x: { title: { display: true, text: "Thời gian (s)" } },
+                y: {
+                  type: "linear",
+                  display: true,
+                  position: "left",
+                  title: { display: true, text: "Li độ (cm)" },
+                },
+                y1: {
+                  type: "linear",
+                  display: true,
+                  position: "right",
+                  grid: { drawOnChartArea: false },
+                  title: { display: true, text: "Vận tốc (cm/s)" },
+                },
+                y2: { display: false },
               },
             },
           });
@@ -831,23 +999,18 @@
 
         function createEnergyChart() {
           const ctx = document.getElementById("energyChart").getContext("2d");
-          const k = 20,
-            A = 0.1,
-            m = 0.2;
-          const W = 0.5 * k * A * A;
+          const W = 1;
           const labels = Array.from({ length: 51 }, (_, i) =>
-            (i * 0.1).toFixed(1)
+            (i * 0.1 * Math.PI).toFixed(2)
           );
-          const omega = Math.sqrt(k / m);
-
-          charts["energyChart"] = new Chart(ctx, {
+          charts["energyChartObj"] = new Chart(ctx, {
             type: "line",
             data: {
               labels: labels,
               datasets: [
                 {
                   label: "Động năng (Wđ)",
-                  data: labels.map((t) => W * Math.pow(Math.sin(omega * t), 2)),
+                  data: labels.map((t) => W * Math.pow(Math.sin(2 * t), 2)),
                   backgroundColor: "rgba(16, 185, 129, 0.5)",
                   borderColor: "#10b981",
                   fill: true,
@@ -855,7 +1018,7 @@
                 },
                 {
                   label: "Thế năng (Wt)",
-                  data: labels.map((t) => W * Math.pow(Math.cos(omega * t), 2)),
+                  data: labels.map((t) => W * Math.pow(Math.cos(2 * t), 2)),
                   backgroundColor: "rgba(56, 189, 248, 0.5)",
                   borderColor: "#38bdf8",
                   fill: true,
@@ -871,15 +1034,14 @@
               ],
             },
             options: {
-              responsive: true,
-              maintainAspectRatio: false,
+              ...chartDefaultOptions,
               scales: {
                 y: {
                   beginAtZero: true,
                   stacked: true,
                   title: { display: true, text: "Năng lượng (J)" },
                 },
-                x: { title: { display: true, text: "Thời gian (s)" } },
+                x: { title: { display: true, text: "Pha dao động (rad)" } },
               },
             },
           });
@@ -898,151 +1060,63 @@
               x: { ticks: { display: false }, grid: { display: false } },
               y: { ticks: { display: false }, grid: { display: false } },
             },
-            elements: { line: { tension: 0.4 } },
+            elements: { line: { tension: 0.4, pointRadius: 0 } },
           };
-
-          // In-phase
-          const ctxInPhase = document
-            .getElementById("inPhaseChart")
-            .getContext("2d");
-          new Chart(ctxInPhase, {
+          new Chart(document.getElementById("inPhaseChart").getContext("2d"), {
             type: "line",
             data: {
               labels,
               datasets: [
-                { data: data1, borderColor: "#38bdf8", pointRadius: 0 },
+                { data: data1, borderColor: "#38bdf8" },
                 {
                   data: labels.map((t) => 10 * Math.cos(2 * Math.PI * t)),
                   borderColor: "#10b981",
-                  pointRadius: 0,
                   borderDash: [5, 5],
                 },
               ],
             },
             options: commonOptions,
           });
-
-          // Out-of-phase
-          const ctxOutOfPhase = document
-            .getElementById("outOfPhaseChart")
-            .getContext("2d");
-          new Chart(ctxOutOfPhase, {
-            type: "line",
-            data: {
-              labels,
-              datasets: [
-                { data: data1, borderColor: "#38bdf8", pointRadius: 0 },
-                {
-                  data: labels.map(
-                    (t) => 10 * Math.cos(2 * Math.PI * t + Math.PI)
-                  ),
-                  borderColor: "#f97316",
-                  pointRadius: 0,
-                  borderDash: [5, 5],
-                },
-              ],
-            },
-            options: commonOptions,
-          });
-
-          // Quadrature
-          const ctxQuadrature = document
-            .getElementById("quadraturePhaseChart")
-            .getContext("2d");
-          new Chart(ctxQuadrature, {
-            type: "line",
-            data: {
-              labels,
-              datasets: [
-                { data: data1, borderColor: "#38bdf8", pointRadius: 0 },
-                {
-                  data: labels.map(
-                    (t) => 10 * Math.cos(2 * Math.PI * t + Math.PI / 2)
-                  ),
-                  borderColor: "#a855f7",
-                  pointRadius: 0,
-                  borderDash: [5, 5],
-                },
-              ],
-            },
-            options: commonOptions,
-          });
-        }
-
-        function createRestoringForceAnimation() {
-          const canvas = document.getElementById("restoringForceCanvas");
-          if (!canvas) return;
-          const ctx = canvas.getContext("2d");
-          let animationFrameId;
-
-          function resizeCanvas() {
-            canvas.width = canvas.parentElement.offsetWidth;
-            canvas.height = 100;
-          }
-          resizeCanvas();
-          window.addEventListener("resize", resizeCanvas);
-
-          const w = canvas.width;
-          const h = canvas.height;
-          const centerX = w / 2;
-          const centerY = h / 2 - 10;
-          const amplitude = w * 0.4;
-          const massRadius = 15;
-          const arrowHeight = h / 2 + 30;
-
-          function drawArrow(x, y, length) {
-            if (Math.abs(length) < 1) return;
-            ctx.beginPath();
-            ctx.moveTo(x, y);
-            ctx.lineTo(x + length, y);
-            ctx.strokeStyle = "#ef4444";
-            ctx.lineWidth = 3;
-            ctx.stroke();
-
-            ctx.beginPath();
-            const sign = Math.sign(length);
-            ctx.moveTo(x + length, y);
-            ctx.lineTo(x + length - sign * 10, y - 5);
-            ctx.lineTo(x + length - sign * 10, y + 5);
-            ctx.closePath();
-            ctx.fillStyle = "#ef4444";
-            ctx.fill();
-          }
-
-          function animate(time) {
-            const w = canvas.width;
-            const h = canvas.height;
-            const centerX = w / 2;
-            const amplitude = w * 0.4;
-
-            const t = time / 1000;
-            const x_pos = amplitude * Math.cos(t);
-            const forceMagnitude = -x_pos * 0.8;
-
-            ctx.clearRect(0, 0, w, h);
-
-            ctx.beginPath();
-            ctx.moveTo(centerX, 0);
-            ctx.lineTo(centerX, h);
-            ctx.strokeStyle = "#cbd5e1";
-            ctx.setLineDash([5, 5]);
-            ctx.stroke();
-            ctx.setLineDash([]);
-
-            ctx.beginPath();
-            ctx.arc(centerX + x_pos, centerY, massRadius, 0, 2 * Math.PI);
-            ctx.fillStyle = "#0ea5e9";
-            ctx.fill();
-
-            drawArrow(centerX + x_pos, arrowHeight, forceMagnitude);
-
-            animationFrameId = requestAnimationFrame(animate);
-          }
-          // Cancel any previous animation frame before starting a new one
-          if (animationFrameId) {
-            cancelAnimationFrame(animationFrameId);
-          }
-          animate(0);
+          new Chart(
+            document.getElementById("outOfPhaseChart").getContext("2d"),
+            {
+              type: "line",
+              data: {
+                labels,
+                datasets: [
+                  { data: data1, borderColor: "#38bdf8" },
+                  {
+                    data: labels.map(
+                      (t) => 10 * Math.cos(2 * Math.PI * t + Math.PI)
+                    ),
+                    borderColor: "#f97316",
+                    borderDash: [5, 5],
+                  },
+                ],
+              },
+              options: commonOptions,
+            }
+          );
+          new Chart(
+            document.getElementById("quadraturePhaseChart").getContext("2d"),
+            {
+              type: "line",
+              data: {
+                labels,
+                datasets: [
+                  { data: data1, borderColor: "#38bdf8" },
+                  {
+                    data: labels.map(
+                      (t) => 10 * Math.cos(2 * Math.PI * t + Math.PI / 2)
+                    ),
+                    borderColor: "#a855f7",
+                    borderDash: [5, 5],
+                  },
+                ],
+              },
+              options: commonOptions,
+            }
+          );
         }
 
         function createOscillationTypeChart() {
@@ -1055,8 +1129,13 @@
           const labels = Array.from({ length: 101 }, (_, i) =>
             (i * 0.2).toFixed(1)
           );
-
           const dataSets = {
+            free: {
+              label: "Dao động tự do",
+              data: labels.map((t) => 10 * Math.cos(2 * Math.PI * t)),
+              borderColor: "#0ea5e9",
+              description: `<h4 class="font-semibold text-lg">Dao động Tự do</h4><p>Dao động có biên độ và tần số riêng không đổi theo thời gian (khi bỏ qua mọi ma sát).</p>`,
+            },
             damped: {
               label: "Dao động tắt dần",
               data: labels.map(
@@ -1065,32 +1144,28 @@
               borderColor: "#f59e0b",
               description: `<h4 class="font-semibold text-lg">Dao động Tắt dần</h4><p>Dao động có biên độ giảm dần theo thời gian do tác dụng của lực cản, ma sát làm tiêu hao cơ năng.</p>`,
             },
-            maintained: {
-              label: "Dao động duy trì",
-              data: labels.map((t) => 10 * Math.cos(2 * Math.PI * t)),
-              borderColor: "#0ea5e9",
-              description: `<h4 class="font-semibold text-lg">Dao động Duy trì</h4><p>Hệ được cung cấp năng lượng đúng bằng phần đã mất sau mỗi chu kì, làm cho biên độ không đổi.</p>`,
-            },
             forced: {
               label: "Dao động cưỡng bức",
               data: labels.map((t) => 8 * Math.cos(1.8 * Math.PI * t)),
               borderColor: "#10b981",
-              description: `<h4 class="font-semibold text-lg">Dao động Cưỡng bức</h4><p>Dao động dưới tác dụng của một ngoại lực tuần hoàn. Tần số dao động bằng tần số của ngoại lực.</p>`,
+              description: `<h4 class="font-semibold text-lg">Dao động Cưỡng bức</h4><p>Dao động dưới tác dụng của một ngoại lực tuần hoàn. Tần số dao động bằng tần số của ngoại lực, biên độ không đổi.</p>`,
             },
           };
-
           const chart = new Chart(ctx, {
             type: "line",
-            data: { labels: labels, datasets: [dataSets.damped] },
+            data: { labels: labels, datasets: [dataSets.free] },
             options: {
-              responsive: true,
-              maintainAspectRatio: false,
+              ...chartDefaultOptions,
               scales: { y: { min: -12, max: 12 } },
             },
           });
-          charts["oscillationTypeChart"] = chart;
-          descriptionDiv.innerHTML = dataSets.damped.description;
-
+          charts["oscillationTypeChartObj"] = chart;
+          descriptionDiv.innerHTML = dataSets.free.description;
+          document.getElementById("btn-free").addEventListener("click", () => {
+            chart.data.datasets = [dataSets.free];
+            chart.update();
+            descriptionDiv.innerHTML = dataSets.free.description;
+          });
           document
             .getElementById("btn-damped")
             .addEventListener("click", () => {
@@ -1099,19 +1174,216 @@
               descriptionDiv.innerHTML = dataSets.damped.description;
             });
           document
-            .getElementById("btn-maintained")
-            .addEventListener("click", () => {
-              chart.data.datasets = [dataSets.maintained];
-              chart.update();
-              descriptionDiv.innerHTML = dataSets.maintained.description;
-            });
-          document
             .getElementById("btn-forced")
             .addEventListener("click", () => {
               chart.data.datasets = [dataSets.forced];
               chart.update();
               descriptionDiv.innerHTML = dataSets.forced.description;
             });
+        }
+
+        function createResonanceChart() {
+          const ctx = document
+            .getElementById("resonanceChart")
+            .getContext("2d");
+          const f0 = 5.0;
+          const createResonanceData = (damping) => {
+            let data = [];
+            for (let f = 0; f <= 10; f += 0.2) {
+              const amplitude =
+                1 / Math.sqrt(Math.pow(f * f - f0 * f0, 2) + damping * f * f);
+              data.push({ x: f, y: amplitude });
+            }
+            return data;
+          };
+          charts["resonanceChartObj"] = new Chart(ctx, {
+            type: "line",
+            data: {
+              datasets: [
+                {
+                  label: "Lực cản nhỏ",
+                  data: createResonanceData(1),
+                  borderColor: "#ef4444",
+                  tension: 0.4,
+                  fill: false,
+                },
+                {
+                  label: "Lực cản trung bình",
+                  data: createResonanceData(10),
+                  borderColor: "#f97316",
+                  tension: 0.4,
+                  fill: false,
+                },
+                {
+                  label: "Lực cản lớn",
+                  data: createResonanceData(50),
+                  borderColor: "#f59e0b",
+                  tension: 0.4,
+                  fill: false,
+                },
+              ],
+            },
+            options: {
+              ...chartDefaultOptions,
+              scales: {
+                x: {
+                  type: "linear",
+                  position: "bottom",
+                  title: { display: true, text: "Tần số ngoại lực f (Hz)" },
+                },
+                y: { title: { display: true, text: "Biên độ A" } },
+              },
+            },
+          });
+        }
+
+        function setupComprehensiveSimulation() {
+          const controls = {
+            amp: document.getElementById("amplitude"),
+            omega: document.getElementById("omega"),
+            phi: document.getElementById("phi"),
+            showX: document.getElementById("showX"),
+            showV: document.getElementById("showV"),
+            showA: document.getElementById("showA"),
+            showEnergy: document.getElementById("showEnergy"),
+          };
+          const values = {
+            amp: document.getElementById("amplitudeValue"),
+            omega: document.getElementById("omegaValue"),
+            phi: document.getElementById("phiValue"),
+          };
+          const chartCtx = document
+            .getElementById("interactiveChart")
+            .getContext("2d");
+          const animCanvas = document.getElementById("massAnimation");
+          const animCtx = animCanvas.getContext("2d");
+          let animFrameId;
+          const time = Array.from({ length: 101 }, (_, i) =>
+            (i * 0.1).toFixed(1)
+          );
+          const interactiveChart = new Chart(chartCtx, {
+            type: "line",
+            data: { labels: time, datasets: [] },
+            options: {
+              ...chartDefaultOptions,
+              scales: {
+                x: { title: { display: true, text: "Thời gian t (s)" } },
+                y: {
+                  type: "linear",
+                  position: "left",
+                  title: { display: true, text: "x, v, a" },
+                },
+                yEnergy: {
+                  type: "linear",
+                  position: "right",
+                  grid: { drawOnChartArea: false },
+                  title: { display: true, text: "Năng lượng" },
+                },
+              },
+            },
+          });
+          function updateSimulation() {
+            const A = parseFloat(controls.amp.value),
+              w = parseFloat(controls.omega.value),
+              p = parseFloat(controls.phi.value) * Math.PI,
+              m = 0.5,
+              k = m * w * w,
+              W = 0.5 * k * A * A;
+            values.amp.textContent = A.toFixed(1);
+            values.omega.textContent = w.toFixed(1);
+            values.phi.textContent = (p / Math.PI).toFixed(2);
+            const datasets = [];
+            if (controls.showX.checked)
+              datasets.push({
+                label: "Li độ x (cm)",
+                data: time.map((t) => A * Math.cos(w * t + p)),
+                borderColor: "#38bdf8",
+                yAxisID: "y",
+                pointRadius: 0,
+              });
+            if (controls.showV.checked)
+              datasets.push({
+                label: "Vận tốc v (cm/s)",
+                data: time.map((t) => -A * w * Math.sin(w * t + p)),
+                borderColor: "#10b981",
+                yAxisID: "y",
+                pointRadius: 0,
+              });
+            if (controls.showA.checked)
+              datasets.push({
+                label: "Gia tốc a (cm/s²)",
+                data: time.map((t) => -A * w * w * Math.cos(w * t + p)),
+                borderColor: "#f97316",
+                yAxisID: "y",
+                pointRadius: 0,
+              });
+            if (controls.showEnergy.checked) {
+              datasets.push({
+                label: "Động năng Wđ",
+                data: time.map(
+                  (t) => 0.5 * m * Math.pow(-A * w * Math.sin(w * t + p), 2)
+                ),
+                borderColor: "#10b981",
+                backgroundColor: "rgba(16, 185, 129, 0.2)",
+                fill: true,
+                yAxisID: "yEnergy",
+                pointRadius: 0,
+              });
+              datasets.push({
+                label: "Thế năng Wt",
+                data: time.map(
+                  (t) => 0.5 * k * Math.pow(A * Math.cos(w * t + p), 2)
+                ),
+                borderColor: "#38bdf8",
+                backgroundColor: "rgba(56, 189, 248, 0.2)",
+                fill: true,
+                yAxisID: "yEnergy",
+                pointRadius: 0,
+              });
+              datasets.push({
+                label: "Cơ năng W",
+                data: time.map(() => W),
+                borderColor: "#ef4444",
+                borderWidth: 3,
+                yAxisID: "yEnergy",
+                pointRadius: 0,
+              });
+            }
+            interactiveChart.data.datasets = datasets;
+            interactiveChart.update();
+            if (animFrameId) cancelAnimationFrame(animFrameId);
+            window.startTime = performance.now();
+            animateMass(window.startTime);
+          }
+          function animateMass(timestamp) {
+            const A_val = parseFloat(controls.amp.value),
+              w_val = parseFloat(controls.omega.value),
+              p_val = parseFloat(controls.phi.value) * Math.PI;
+            const elapsed = (timestamp - window.startTime) / 1000;
+            const canvasW = animCanvas.width,
+              canvasH = animCanvas.height,
+              centerY = canvasH / 2,
+              animAmplitude = canvasW / 2 - 20;
+            const x_pos = A_val * Math.cos(w_val * elapsed + p_val);
+            const screen_x = canvasW / 2 + (x_pos / 10) * animAmplitude;
+            animCtx.clearRect(0, 0, canvasW, canvasH);
+            animCtx.beginPath();
+            animCtx.moveTo(canvasW / 2, 0);
+            animCtx.lineTo(canvasW / 2, canvasH);
+            animCtx.strokeStyle = "#cbd5e1";
+            animCtx.setLineDash([5, 5]);
+            animCtx.stroke();
+            animCtx.setLineDash([]);
+            animCtx.beginPath();
+            animCtx.arc(screen_x, centerY, 10, 0, 2 * Math.PI);
+            animCtx.fillStyle = "#0ea5e9";
+            animCtx.fill();
+            animFrameId = requestAnimationFrame(animateMass);
+          }
+          Object.values(controls).forEach((el) =>
+            el.addEventListener("input", updateSimulation)
+          );
+          updateSimulation();
         }
 
         function createPhaseShiftChart() {
@@ -1126,13 +1398,11 @@
           const labels = Array.from({ length: 101 }, (_, i) =>
             (i * 0.1).toFixed(1)
           );
-
           function getWaveData(phi) {
             return labels.map(
               (t) => 10 * Math.cos(Math.PI * t + phi * Math.PI)
             );
           }
-
           const chart = new Chart(ctx, {
             type: "line",
             data: {
@@ -1151,16 +1421,16 @@
                   borderColor: "#10b981",
                   borderWidth: 2,
                   pointRadius: 0,
+                  borderDash: [5, 5],
                 },
               ],
             },
-            options: { responsive: true, maintainAspectRatio: false },
+            options: chartDefaultOptions,
           });
-          charts["phaseShiftChart"] = chart;
-
+          charts["phaseShiftChartObj"] = chart;
           function updateChart() {
-            const phi1 = parseFloat(phi1Slider.value);
-            const phi2 = parseFloat(phi2Slider.value);
+            const phi1 = parseFloat(phi1Slider.value),
+              phi2 = parseFloat(phi2Slider.value);
             phi1Value.textContent = phi1.toFixed(2);
             phi2Value.textContent = phi2.toFixed(2);
             deltaPhiValue.textContent = (phi2 - phi1).toFixed(2);
@@ -1168,12 +1438,12 @@
             chart.data.datasets[1].data = getWaveData(phi2);
             chart.update();
           }
-
           phi1Slider.addEventListener("input", updateChart);
           phi2Slider.addEventListener("input", updateChart);
           updateChart();
         }
 
+        // --- Initial Load ---
         switchTab("lesson-1-2");
       });
     </script>
