@@ -201,6 +201,58 @@
           height: 50px;
         }
       }
+
+      /* Quiz styles */
+      .quiz-question {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid #e2e8f0; /* Slate 200 */
+      }
+      .quiz-question:last-of-type {
+        border-bottom: none;
+      }
+      .quiz-options label {
+        display: block;
+        padding: 0.75rem 1rem;
+        border: 1px solid #cbd5e1; /* Slate 300 */
+        border-radius: 0.5rem;
+        margin-bottom: 0.5rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .quiz-options input:checked + label {
+        background-color: #e0f2fe; /* Sky 100 */
+        border-color: #38bdf8; /* Sky 400 */
+        font-weight: 500;
+      }
+      .quiz-options input {
+        display: none;
+      }
+      .quiz-options label.correct {
+        background-color: #dcfce7; /* Green 100 */
+        border-color: #22c55e; /* Green 500 */
+      }
+      .quiz-options label.incorrect {
+        background-color: #fee2e2; /* Red 100 */
+        border-color: #ef4444; /* Red 500 */
+      }
+      .explanation {
+        margin-top: 0.75rem;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        font-size: 0.9rem;
+        display: none;
+      }
+      .explanation.correct {
+        background-color: #f0fdf4; /* Green 50 */
+        color: #15803d; /* Green 700 */
+        display: block;
+      }
+      .explanation.incorrect {
+        background-color: #fef2f2; /* Red 50 */
+        color: #b91c1c; /* Red 700 */
+        display: block;
+      }
     </style>
   </head>
   <body class="text-slate-800">
@@ -240,6 +292,12 @@
           data-target="simulations"
         >
           Mô Phỏng & Thí Nghiệm
+        </button>
+        <button
+          class="nav-btn py-3 px-2 md:px-4 text-sm md:text-base font-semibold text-slate-600 hover:bg-sky-50"
+          data-target="exercises"
+        >
+          Bài Tập
         </button>
       </div>
     </nav>
@@ -391,10 +449,11 @@
               </p>
             </div>
           </div>
-          <br> </br>
-          Biên độ, chu kì, tần số và tần số góc là những hằng số đặc trưng cho
-          một dao động cụ thể và hoàn toàn không phụ thuộc vào thời điểm quan
-          sát.
+          <p class="mt-4 text-slate-600">
+            Biên độ, chu kì, tần số và tần số góc là những hằng số đặc trưng cho
+            một dao động cụ thể và hoàn toàn không phụ thuộc vào thời điểm quan
+            sát.
+          </p>
         </div>
 
         <div class="concept-card">
@@ -402,10 +461,9 @@
             5. Pha ban đầu
           </h3>
           <p class="text-slate-600 mb-4">
-            -	Pha ban đầu ($\phi$): Đại lượng này có vai trò xác định trạng thái xuất phát của dao động. Nó "cho biết tại thời điểm bắt đầu quan sát vật dao động điều hoà ở đâu và sẽ đi về phía nào".
-          <br> -	$\phi$ thuộc (-π; π) </br>
-          </p>
-
+            Pha ban đầu ($\phi$): Đại lượng này có vai trò xác định trạng thái
+            xuất phát của dao động. Nó "cho biết tại thời điểm bắt đầu quan sát
+            vật dao động điều hoà ở đâu và sẽ đi về phía nào".
           </p>
         </div>
 
@@ -414,13 +472,17 @@
             6. Minh Họa Độ Lệch Pha
           </h3>
           <p class="text-slate-600 mb-4">
+            Độ lệch pha quan trọng hơn pha, vì nó là đại lượng không đổi, không
+            phụ thuộc vào thời điểm quan sát.
+          </p>
+          <p class="text-slate-600 mb-4">
             Độ lệch pha $\Delta\phi = \phi_2 - \phi_1$ cho biết sự sớm hay trễ
             pha giữa hai dao động.
           </p>
           <div class="grid md:grid-cols-3 gap-8 mt-4 text-center">
             <div>
               <h4 class="font-semibold mb-2">
-                Cùng Pha ($\Delta\phi = 2k\pi$)
+                Cùng Pha ($\Delta\phi = 2k\pi$ |$(0)$)
               </h4>
               <div class="chart-container" style="height: 150px">
                 <canvas id="inPhaseChart"></canvas>
@@ -428,7 +490,7 @@
             </div>
             <div>
               <h4 class="font-semibold mb-2">
-                Ngược Pha ($\Delta\phi = (2k+1)\pi$)
+                Ngược Pha ($\Delta\phi = (2k+1)\pi$ | $(\pi)$)
               </h4>
               <div class="chart-container" style="height: 150px">
                 <canvas id="outOfPhaseChart"></canvas>
@@ -436,7 +498,8 @@
             </div>
             <div>
               <h4 class="font-semibold mb-2">
-                Vuông Pha ($\Delta\phi = (2k+1)\frac{\pi}{2}$)
+                Vuông Pha ($\Delta\phi = (2k+1)\frac{\pi}{2}$ |
+                $(\frac{\pi}{2})$)
               </h4>
               <div class="chart-container" style="height: 150px">
                 <canvas id="quadraturePhaseChart"></canvas>
@@ -451,6 +514,19 @@
         <h2 class="text-2xl font-bold text-sky-700 mb-4">
           Bài 3 & 5: Vận Tốc, Gia Tốc và Năng Lượng
         </h2>
+        <div class="concept-card">
+          <h3 class="text-xl font-semibold mb-3 text-slate-700">
+            0. Phương trình li độ
+          </h3>
+          <div class="grid md:grid-cols-2 gap-6 items-center">
+            <div>
+              <div class="formula-card mb-4">
+                <h4 class="font-semibold">Li độ ($x$)</h4>
+                <p>$x = A\cos(\omega t + \phi)$</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="concept-card">
           <h3 class="text-xl font-semibold mb-3 text-slate-700">
@@ -460,16 +536,35 @@
             <div>
               <div class="formula-card mb-4">
                 <h4 class="font-semibold">Vận tốc (v)</h4>
-                <p>$v = x' = -\omega A\sin(\omega t + \phi)$</p>
+                <p>
+                  $v = x' = -\omega A\sin(\omega t + \phi) = \omega A\cos(\omega
+                  t + \phi + \frac{\pi}{2})$
+                </p>
+
+                <p class="text-sm text-slate-600 mt-1">
+                  Độ lớn: $v = \pm\omega\sqrt{A^2 - x^2}$
+                </p>
                 <p class="text-sm text-slate-600 mt-1">
                   Sớm pha $\frac{\pi}{2}$ so với li độ $x$.
+                </p>
+                <p class="text-sm text-slate-600 mt-1">
+                  Cực đại tại vị trí cân bằng ($v = \pm\omega A$), bằng 0 tại
+                  biên.
                 </p>
               </div>
               <div class="formula-card">
                 <h4 class="font-semibold">Gia tốc (a)</h4>
-                <p>$a = v' = -\omega^2x$</p>
+                <p>
+                  $a = v' = x'' = -\omega^2\cos(\omega t + \phi) =
+                  \omega^2\cos(\omega t + \phi + \pi) = -\omega^2x$
+                </p>
                 <p class="text-sm text-slate-600 mt-1">
-                  Ngược pha với li độ $x$.
+                  Cực đại tại vị trí biên ($a = \pm\omega^2A$), bằng 0 tại vị
+                  trí cân bằng.
+                </p>
+                <p class="text-sm text-slate-600 mt-1">
+                  Ngược pha $\pi$ với li độ $x$ và sớm pha $\frac{\pi}{2}$ so
+                  với vận tốc.
                 </p>
               </div>
             </div>
@@ -561,19 +656,23 @@
                 Cơ năng được bảo toàn. Động năng và thế năng biến thiên tuần
                 hoàn, chuyển hóa qua lại lẫn nhau.
               </p>
-              <div class="space-y-3">
-                <p>
-                  <strong class="font-medium">Động năng:</strong> $W_đ =
-                  \frac{1}{2}mv^2$ (cực đại tại VTCB)
-                </p>
-                <p>
-                  <strong class="font-medium">Thế năng:</strong> $W_t =
-                  \frac{1}{2}kx^2$ (cực đại tại biên)
-                </p>
-                <p>
-                  <strong class="font-medium">Cơ năng:</strong> $W = W_đ + W_t =
-                  \text{hằng số}$
-                </p>
+              <div class="formula-card mb-4">
+                <h4 class="font-semibold">Động năng ($W_đ$)</h4>
+                <p>$W_đ = \frac{1}{2}mv^2 = \frac{1}{2}m\omega^2(A^2 - x^2)$</p>
+                <br />
+                <p>$W_đmax = \frac{1}{2}m\omega^2A^2$</p>
+              </div>
+
+              <div class="formula-card mb-4">
+                <h4 class="font-semibold">Thế năng ($W_t$)</h4>
+                <p>$W_t = \frac{1}{2}m\omega^2x^2$</p>
+                <br />
+                <p>$W_tmax = W_đmax = \frac{1}{2}m\omega^2A^2$</p>
+              </div>
+
+              <div class="formula-card">
+                <h4 class="font-semibold">Cơ năng ($W$)</h4>
+                <p>$W = W_đ + W_t = \frac{1}{2}m\omega^2A^2 = hằng số$</p>
               </div>
             </div>
             <div class="text-center">
@@ -611,8 +710,15 @@
                 <div class="spring-coil"></div>
                 <div class="spring-mass">m</div>
               </div>
+
               <div class="formula-card mt-2">
+                <p>Thế năng đàn hồi: $W_t = \frac{1}{2}kx^2$</p>
+                <br />
                 <p>$\omega = \sqrt{\frac{k}{m}}$</p>
+                <br />
+                <p>$T = 2\pi\sqrt{\frac{m}{k}}$</p>
+                <br />
+                <p>$W = \frac{1}{2}kA^2$</p>
               </div>
             </div>
             <div class="text-center">
@@ -624,7 +730,11 @@
                 <div class="pendulum-rod"><div class="pendulum-bob"></div></div>
               </div>
               <div class="formula-card mt-2">
+                <p>Thế năng trọng trường: $W_t = mgl(1 - \cos\alpha)$</p>
+                <br />
                 <p>$\omega = \sqrt{\frac{g}{l}}$ (với góc lệch nhỏ)</p>
+                <br />
+                <p>$T = 2\pi\sqrt{\frac{l}{g}}$</p>
               </div>
             </div>
           </div>
@@ -938,6 +1048,174 @@
           </div>
         </div>
       </section>
+
+      <!-- Bài Tập -->
+      <section id="exercises" class="content-section">
+        <h2 class="text-2xl font-bold text-sky-700 mb-6">
+          Bài Tập Củng Cố Kiến Thức
+        </h2>
+
+        <div id="quiz-container" class="concept-card">
+          <!-- Question 1 -->
+          <div class="quiz-question" id="question-1">
+            <p class="font-semibold mb-3">
+              Câu 1: Trong dao động điều hoà, gia tốc $a$ và li độ $x$ liên hệ
+              với nhau bằng hệ thức nào sau đây?
+            </p>
+            <div class="quiz-options">
+              <input type="radio" name="q1" id="q1a" value="A" /><label
+                for="q1a"
+                >A. $a = \omega x$</label
+              >
+              <input type="radio" name="q1" id="q1b" value="B" /><label
+                for="q1b"
+                >B. $a = -\omega^2 x$</label
+              >
+              <input type="radio" name="q1" id="q1c" value="C" /><label
+                for="q1c"
+                >C. $a = -\omega x$</label
+              >
+              <input type="radio" name="q1" id="q1d" value="D" /><label
+                for="q1d"
+                >D. $a = \omega^2 x$</label
+              >
+            </div>
+            <div class="explanation" id="explanation-1"></div>
+          </div>
+
+          <!-- Question 2 -->
+          <div class="quiz-question" id="question-2">
+            <p class="font-semibold mb-3">
+              Câu 2: Một vật dao động điều hoà có đồ thị li độ theo thời gian
+              như hình vẽ. Biên độ và chu kì dao động của vật là bao nhiêu?
+            </p>
+            <div
+              class="chart-container"
+              style="height: 250px; margin-bottom: 1rem"
+            >
+              <canvas id="quiz-graph-1"></canvas>
+            </div>
+            <div class="quiz-options">
+              <input type="radio" name="q2" id="q2a" value="A" /><label
+                for="q2a"
+                >A. A = 5 cm, T = 2 s</label
+              >
+              <input type="radio" name="q2" id="q2b" value="B" /><label
+                for="q2b"
+                >B. A = 10 cm, T = 4 s</label
+              >
+              <input type="radio" name="q2" id="q2c" value="C" /><label
+                for="q2c"
+                >C. A = 5 cm, T = 4 s</label
+              >
+              <input type="radio" name="q2" id="q2d" value="D" /><label
+                for="q2d"
+                >D. A = 10 cm, T = 2 s</label
+              >
+            </div>
+            <div class="explanation" id="explanation-2"></div>
+          </div>
+
+          <!-- Question 3 -->
+          <div class="quiz-question" id="question-3">
+            <p class="font-semibold mb-3">
+              Câu 3: Khi một vật dao động điều hoà di chuyển từ vị trí cân bằng
+              ra vị trí biên, thì:
+            </p>
+            <div class="quiz-options">
+              <input type="radio" name="q3" id="q3a" value="A" /><label
+                for="q3a"
+                >A. Động năng tăng, thế năng giảm.</label
+              >
+              <input type="radio" name="q3" id="q3b" value="B" /><label
+                for="q3b"
+                >B. Động năng và thế năng cùng tăng.</label
+              >
+              <input type="radio" name="q3" id="q3c" value="C" /><label
+                for="q3c"
+                >C. Động năng giảm, thế năng tăng.</label
+              >
+              <input type="radio" name="q3" id="q3d" value="D" /><label
+                for="q3d"
+                >D. Động năng và thế năng cùng giảm.</label
+              >
+            </div>
+            <div class="explanation" id="explanation-3"></div>
+          </div>
+
+          <!-- Question 4 -->
+          <div class="quiz-question" id="question-4">
+            <p class="font-semibold mb-3">
+              Câu 4: Chu kì dao động của con lắc đơn có chiều dài $l$ tại nơi có
+              gia tốc trọng trường $g$ được xác định bởi công thức nào?
+            </p>
+            <div class="quiz-options">
+              <input type="radio" name="q4" id="q4a" value="A" /><label
+                for="q4a"
+                >A. $T = 2\pi\sqrt{\frac{m}{k}}$</label
+              >
+              <input type="radio" name="q4" id="q4b" value="B" /><label
+                for="q4b"
+                >B. $T = \frac{1}{2\pi}\sqrt{\frac{g}{l}}$</label
+              >
+              <input type="radio" name="q4" id="q4c" value="C" /><label
+                for="q4c"
+                >C. $T = 2\pi\sqrt{\frac{k}{m}}$</label
+              >
+              <input type="radio" name="q4" id="q4d" value="D" /><label
+                for="q4d"
+                >D. $T = 2\pi\sqrt{\frac{l}{g}}$</label
+              >
+            </div>
+            <div class="explanation" id="explanation-4"></div>
+          </div>
+
+          <!-- Question 5 -->
+          <div class="quiz-question" id="question-5">
+            <p class="font-semibold mb-3">
+              Câu 5: Đồ thị dưới đây biểu diễn hai dao động điều hoà (1) và (2).
+              Nhận xét nào sau đây về độ lệch pha giữa hai dao động là đúng?
+            </p>
+            <div
+              class="chart-container"
+              style="height: 250px; margin-bottom: 1rem"
+            >
+              <canvas id="quiz-graph-2"></canvas>
+            </div>
+            <div class="quiz-options">
+              <input type="radio" name="q5" id="q5a" value="A" /><label
+                for="q5a"
+                >A. Dao động (1) sớm pha hơn dao động (2) một góc
+                $\frac{\pi}{2}$.</label
+              >
+              <input type="radio" name="q5" id="q5b" value="B" /><label
+                for="q5b"
+                >B. Dao động (1) trễ pha hơn dao động (2) một góc
+                $\frac{\pi}{2}$.</label
+              >
+              <input type="radio" name="q5" id="q5c" value="C" /><label
+                for="q5c"
+                >C. Hai dao động cùng pha.</label
+              >
+              <input type="radio" name="q5" id="q5d" value="D" /><label
+                for="q5d"
+                >D. Hai dao động ngược pha.</label
+              >
+            </div>
+            <div class="explanation" id="explanation-5"></div>
+          </div>
+
+          <div class="text-center mt-8">
+            <button
+              id="check-quiz-btn"
+              class="bg-sky-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-sky-700 transition-colors duration-300"
+            >
+              Kiểm Tra Đáp Án
+            </button>
+            <div id="quiz-result" class="mt-6 text-xl font-bold"></div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <script>
@@ -964,7 +1242,11 @@
 
         function switchTab(targetId) {
           cancelAllAnimations();
-          Object.values(activeCharts).forEach((chart) => chart.destroy());
+          Object.values(activeCharts).forEach((chart) => {
+            if (chart && typeof chart.destroy === "function") {
+              chart.destroy();
+            }
+          });
           activeCharts = {};
 
           contentSections.forEach((section) =>
@@ -1010,6 +1292,9 @@
             case "simulations":
               setupComprehensiveSimulation();
               createPhaseShiftChart();
+              break;
+            case "exercises":
+              initializeQuiz();
               break;
           }
         }
@@ -1728,6 +2013,163 @@
           phi1Slider.addEventListener("input", updateChart);
           phi2Slider.addEventListener("input", updateChart);
           updateChart();
+        }
+
+        // --- Quiz Logic ---
+        function initializeQuiz() {
+          renderMathInElement(document.getElementById("exercises"));
+          // Graph for Question 2
+          const ctx1 = document
+            .getElementById("quiz-graph-1")
+            ?.getContext("2d");
+          if (ctx1) {
+            const labels = Array.from({ length: 41 }, (_, i) =>
+              (i * 0.1).toFixed(1)
+            );
+            activeCharts.quiz1 = new Chart(ctx1, {
+              type: "line",
+              data: {
+                labels: labels,
+                datasets: [
+                  {
+                    label: "Li độ x (cm)",
+                    data: labels.map((t) => 5 * Math.cos((Math.PI / 2) * t)),
+                    borderColor: "#38bdf8",
+                    tension: 0.1,
+                    pointRadius: 0,
+                  },
+                ],
+              },
+              options: {
+                ...chartDefaultOptions,
+                scales: {
+                  x: { title: { display: true, text: "t(s)" } },
+                  y: { title: { display: true, text: "x(cm)" } },
+                },
+              },
+            });
+          }
+
+          // Graph for Question 5
+          const ctx2 = document
+            .getElementById("quiz-graph-2")
+            ?.getContext("2d");
+          if (ctx2) {
+            const labels = Array.from({ length: 41 }, (_, i) =>
+              (i * 0.1).toFixed(1)
+            );
+            activeCharts.quiz2 = new Chart(ctx2, {
+              type: "line",
+              data: {
+                labels: labels,
+                datasets: [
+                  {
+                    label: "Dao động (1)",
+                    data: labels.map((t) => 8 * Math.cos(Math.PI * t)),
+                    borderColor: "#38bdf8",
+                    tension: 0.1,
+                    pointRadius: 0,
+                  },
+                  {
+                    label: "Dao động (2)",
+                    data: labels.map((t) => 8 * Math.sin(Math.PI * t)), // sin(x) = cos(x - pi/2)
+                    borderColor: "#10b981",
+                    borderDash: [5, 5],
+                    tension: 0.1,
+                    pointRadius: 0,
+                  },
+                ],
+              },
+              options: {
+                ...chartDefaultOptions,
+                scales: {
+                  x: { title: { display: true, text: "t(s)" } },
+                  y: { title: { display: true, text: "x(cm)" } },
+                },
+              },
+            });
+          }
+
+          const checkButton = document.getElementById("check-quiz-btn");
+          if (checkButton) {
+            // Remove existing listener to avoid duplicates on tab switch
+            const newButton = checkButton.cloneNode(true);
+            checkButton.parentNode.replaceChild(newButton, checkButton);
+            newButton.addEventListener("click", checkQuizAnswers);
+          }
+        }
+
+        function checkQuizAnswers() {
+          const answers = {
+            q1: "B",
+            q2: "C",
+            q3: "C",
+            q4: "D",
+            q5: "A",
+          };
+          const explanations = {
+            q1: `Gia tốc trong DĐĐH luôn ngược pha và tỉ lệ với li độ theo công thức $a = -\\omega^2x$.`,
+            q2: "Từ đồ thị, giá trị li độ cực đại là 5 cm, nên A = 5 cm. Vật thực hiện một dao động toàn phần (ví dụ từ đỉnh này đến đỉnh kia) mất 4 s, nên T = 4 s.",
+            q3: "Khi đi từ VTCB ($x=0, v=v_{\\text{max}}, W_đ=W_{\\text{đ,max}}, W_t=0$) ra biên ($x=\\pm A, v=0, W_đ=0, W_t=W_{\\text{t,max}}$), vận tốc giảm nên động năng giảm, li độ tăng nên thế năng tăng.",
+            q4: "Công thức tính chu kì con lắc đơn là $T = 2\\pi\\sqrt{\\frac{l}{g}}$. Công thức $T = 2\\pi\\sqrt{\\frac{m}{k}}$ là của con lắc lò xo.",
+            q5: "Dao động (1) là hàm cos, đạt cực đại tại $t=0$. Dao động (2) là hàm sin, đi qua VTCB theo chiều dương tại $t=0$. Dao động (1) sớm pha hơn dao động (2) một góc $\\frac{\\pi}{2}$ (vì $\\cos(x) = \\sin(x + \\frac{\\pi}{2})$).",
+          };
+          let score = 0;
+          const totalQuestions = Object.keys(answers).length;
+
+          for (const qId in answers) {
+            const questionNumber = qId.substring(1);
+            const correctAnswer = answers[qId];
+            const selectedOption = document.querySelector(
+              `input[name="${qId}"]:checked`
+            );
+
+            const optionLabels = document.querySelectorAll(
+              `#question-${questionNumber} .quiz-options label`
+            );
+            optionLabels.forEach((label) => {
+              label.classList.remove("correct", "incorrect");
+            });
+
+            const explanationEl = document.getElementById(
+              `explanation-${questionNumber}`
+            );
+
+            if (selectedOption) {
+              const userAnswer = selectedOption.value;
+              const userLabel = document.querySelector(
+                `label[for="${selectedOption.id}"]`
+              );
+              const correctLabel = document.querySelector(
+                `label[for="${qId}${correctAnswer.toLowerCase()}"]`
+              );
+
+              if (userAnswer === correctAnswer) {
+                score++;
+                userLabel.classList.add("correct");
+                explanationEl.innerHTML = explanations[qId];
+                explanationEl.className = "explanation correct";
+              } else {
+                userLabel.classList.add("incorrect");
+                if (correctLabel) correctLabel.classList.add("correct");
+                explanationEl.innerHTML = explanations[qId];
+                explanationEl.className = "explanation incorrect";
+              }
+            } else {
+              // No answer selected, mark the correct one
+              const correctLabel = document.querySelector(
+                `label[for="${qId}${correctAnswer.toLowerCase()}"]`
+              );
+              if (correctLabel) correctLabel.classList.add("correct");
+              explanationEl.innerHTML =
+                "Bạn chưa chọn đáp án. " + explanations[qId];
+              explanationEl.className = "explanation incorrect";
+            }
+            renderMathInElement(explanationEl);
+          }
+
+          const resultEl = document.getElementById("quiz-result");
+          resultEl.textContent = `Kết quả: Bạn đã trả lời đúng ${score}/${totalQuestions} câu!`;
         }
 
         // --- Initial Load ---
